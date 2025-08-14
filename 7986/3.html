@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basketball App - Main</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body { 
+  background: radial-gradient(circle at center, #1f2937, #f97316); 
+  color:white; 
+  font-family: 'Oswald', sans-serif; 
+}
+.basket-pattern { 
+  background-image: url('https://i.ibb.co/Ybf5X9q/basketball-texture.png'); 
+  background-size: cover; 
+  background-position: center; 
+  opacity: 0.15; 
+  position: absolute; 
+  top: 0; left:0; 
+  width: 100%; height: 100%; 
+  z-index:0; 
+}
+.btn-basket {
+  @apply px-6 py-3 rounded-2xl font-bold text-lg flex items-center justify-center space-x-3 transform transition-all duration-300;
+}
+.btn-basket:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+.btn-primary { @apply bg-orange-500 hover:bg-orange-600; }
+.btn-secondary { @apply bg-green-500 hover:bg-green-600; }
+.btn-logout { @apply bg-red-500 hover:bg-red-600; }
+</style>
+</head>
+<body class="relative min-h-screen flex flex-col items-center justify-center">
+
+<div class="basket-pattern"></div>
+
+<div class="relative z-10 text-center space-y-8">
+  <h1 class="text-5xl font-bold text-orange-400">🏀 Basketball App</h1>
+  <p class="text-2xl" id="welcomeMsg"></p>
+
+  <div class="space-y-4">
+    <button class="btn-basket btn-primary w-72" id="page1Btn"><i class="fas fa-basketball-ball"></i><span>เข้าสู่ระบบ</span></button>
+    
+    
+
+    <button class="btn-basket btn-logout w-72" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+  </div>
+</div>
+
+<script>
+// ตรวจสอบผู้ใช้ล็อกอิน
+const user = localStorage.getItem('loggedInUser');
+if(!user) {
+  alert("กรุณาล็อกอินก่อน!");
+  window.location.href = "2.html";
+} else {
+  document.getElementById('welcomeMsg').textContent = `ยินดีต้อนรับ, ${user}!`;
+}
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  localStorage.removeItem('loggedInUser');
+  window.location.href = "login.html";
+});
+
+// ปุ่มไปหน้าอื่น
+document.getElementById('page1Btn').addEventListener('click', () => {
+  window.location.href = 'page1.html';
+});
+document.getElementById('page2Btn').addEventListener('click', () => {
+  window.location.href = 'page2.html';
+});
+
+</script>
+
+</body>
+</html>
